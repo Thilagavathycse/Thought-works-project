@@ -1,0 +1,46 @@
+Database naming conventions:
+1.Database names must only consist of the letters a to z (both lower and upper case allowed), the numbers 0 to 9, and the underscore (_) or dash (-) symbols This also means that any non-ASCII database names are not allowed
+2.Database names must always start with a letter. Database names starting with an underscore are considered to be system databases, and users should not create or delete those
+3.The maximum allowed length of a database name is 64 bytes
+4.Database names are case-sensitive
+Table naming conventions:
+1.Plural form
+2.camel case
+Table name is case sensitive or not:
+Answer is No,
+Table names are stored in lowercase on disk and name comparisons are not case-sensitive. MySQL converts all table names to lowercase on storage and lookup. This behavior also applies to database names and table aliases.
+Column naming convention:
+1.all letters should be in lower case
+2.multiple words can be joined by using unser scores
+1. Make all declarative keywords their own new line if possible because it’s easier to read and understand which table and which columns are being referenced:
+example,
+SELECT * FROM tablex
+ WHERE variabley=z 
+ AND variablea=12
+ AND variableb=15 
+legible than 
+ select * from tablex where variabley=z AND variablea=12 AND variableb=15
+2. Make all declarative statements and DB functions uppercase
+example,
+SELECT * FROM tablex
+WHERE variabley=z 
+AND variablea=12
+AND variableb=15
+ORDER BY RAND()
+LIMIT 1
+is legible than 
+ select * from tablex
+ where variabley=z 
+ AND variablea=12
+ AND variableb=15
+ order by RAND()
+ limit 1
+3.Try to minimize the sub query
+4.Include comments
+
+(i) single line
+--this is sinle line comment
+/*multi 
+line 
+comment*/
+
