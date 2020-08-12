@@ -41,8 +41,8 @@ def get_items(category_id):
     return jsonify(formatted_result)
 
 
-@app.route('/categories/<category_id>/<item_id>/')
-def get_items_details(item_id , category_id):
+@app.route('/items/<item_id>/')
+def get_items_details(item_id):
     details = db.execute("select items.item_id,items.item_name,sellers.name as seller_name,items.price,items.description from purchase.items inner "
                          "join purchase.sellers ON items.seller_id=sellers.id where item_id=\'{}\'".format(item_id))
     formatted_result = [dict(row) for row in details]
@@ -50,9 +50,3 @@ def get_items_details(item_id , category_id):
 
 
 db = connect_db()
-
-
-print("Database connected successfully")
-if __name__ == "__main__":
-    app.run(debug=True)
-
