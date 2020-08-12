@@ -1,0 +1,26 @@
+INSERT INTO users values ('1','thilaga','@123');
+set search_path to purchase;
+select * from categories;
+INSERT INTO categories values ('12','toys');
+INSERT INTO categories values ('13','furnitures');
+INSERT INTO categories values('14','cars');
+
+items table creation:
+SET SEARCH_PATH TO purchase;
+CREATE TABLE items(
+item_id TEXT PRIMARY KEY,
+item_name TEXT,
+seller_id TEXT,
+FOREIGN KEY (seller_id) references sellers(id),
+price FLOAT,
+description TEXT,
+category_id INT,
+FOREIGN KEY (category_id) references categories(id)
+);
+
+select * from items;
+insertion at items table:
+INSERT INTO items values('i1','java','s1','100.0','developers guide','11');
+INSERT INTO items values('i2','tiger','s2','120.0','joyful toy','12');
+INSERT INTO items values('i3','chair','s3','200.0','very cheap','13');
+INSERT INTO items values('i4','audi','s4','10000000.0','very costly','14');
