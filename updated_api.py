@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 from sqlalchemy import create_engine
-from usee import User
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 
@@ -50,3 +49,9 @@ def get_items_details(item_id):
 
 
 db = connect_db()
+
+
+print("Database connected successfully")
+if __name__ == "__main__":
+    app.run(debug=True)
+
