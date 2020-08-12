@@ -55,3 +55,4 @@ db = connect_db()
 print("Database connected successfully")
 if __name__ == "__main__":
     app.run(debug=True)
+
