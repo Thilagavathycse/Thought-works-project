@@ -9,4 +9,4 @@ app = Flask(__name__)
 def logout():
     if 'name' in session:
         session.pop('name', None)
-        return "Thank you ! logged out success fully"""
+        return "Thank you ! logged out success fully"

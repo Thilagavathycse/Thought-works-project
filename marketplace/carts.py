@@ -1,5 +1,5 @@
 from database import db
-from flask import Flask,request,session,jsonify
+from flask import Flask, request,session,jsonify
 
 app = Flask(__name__)
 app.secret_key = 'onlineshoppingproject'
@@ -45,12 +45,12 @@ def remove_item_from_cart(item_id):
 def view_cart_items(item_id):
     item_identity = item_id
     user_identity = request.form.get('user_identity')
-    if user_identity in session:
-        cart_items = db.execute("select items.id,items.name,items.price,items.description from items inner join  carts on carts.item_id=items.id")
-        cart_items = [formatted_result(row) for row in cart_items]
-        return jsonify(cart_items)
-    else:
-        return "login required"
+    #if user_identity in session:
+    cart_items = db.execute("select items.id,items.name,items.price,items.description from items inner join  carts on carts.item_id=items.id")
+    cart_items = [formatted_result(row) for row in cart_items]
+    return jsonify(cart_items)
+    #else:
+        #return "login required"
 
 def formatted_result(row):
     return "product id: " + str(row.item_id) + " " + "product name: " + str(row.name)+ " "+"price :"+ str(row.price)

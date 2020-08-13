@@ -1,7 +1,5 @@
-from database import db
+from database import *
 from flask import Flask,  jsonify
-
-app = Flask(__name__)
 
 @app.route('/categories', methods=['GET'])
 def display_categories():
