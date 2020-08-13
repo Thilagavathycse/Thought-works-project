@@ -93,14 +93,6 @@ def view_cart_items(item_id):
         return jsonify(cart_items)
     else:
         return "login required"
-"""def formatted_result(row):
-    return "product id: " + str(row.item_id) + " " + "product name: " + str(row.name)+ " "+"price :" """
-
-
-
-
-
-
 
 
 @app.route('/logout', methods=['DELETE'])
@@ -108,9 +100,6 @@ def logout():
     if 'name' in session:
         session.pop('name', None)
         return "Thank you ! logged out success fully"""
-
-
-
 
 
 
