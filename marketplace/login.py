@@ -11,8 +11,8 @@ def validate_user():
     user_details = db.execute("SELECT * from users WHERE name= \'{}\'  and password= \'{}\'".format(username,password))
     data = user_details.fetchone()
     if data is None:
-        return "user or password is wrong"
+        return jsonify({"message": "Sorry,can't access: Unauthorized"}), 401
     else:
-        return "logged in successfuly"
+        return jsonify({"message": "SUCCESS!: Authorized"}), 200
 
 
