@@ -47,7 +47,6 @@ def display_categories():
     formatted_result = [display(row) for row in categories]
     return jsonify(formatted_result)
 
-
 def display(row):
     return "id: "+str(row.id)+","+"name: "+str(row.name)
 
