@@ -25,7 +25,7 @@ def token_required(f):
 
 @app.route('/')
 def index():
-    return "<h1>WELCOME TO MARKET PLACE</h1>"
+    return "<h1>WELCOME TO MARKET PLACE</h1>",200
 
 
 @app.route('/user', methods=['POST'])
