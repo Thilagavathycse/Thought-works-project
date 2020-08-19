@@ -1,4 +1,4 @@
-from api import *
+from main import *
 import datetime
 
 @app.route('/user', methods=['POST'])
