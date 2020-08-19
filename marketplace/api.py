@@ -43,6 +43,7 @@ def validate_user():
 
 
 @app.route('/categories', methods=['GET'])
+@token_required
 def display_categories():
     categories = session.query(Category).all()
     formatted_result = [display(row) for row in categories]
@@ -53,6 +54,7 @@ def display(row):
 
 
 @app.route('/categories/<category_id>/', methods=['GET'])
+@token_required
 def get_items(category_id):
     item_details = session.query(Item).join(Category).filter(Category.id == category_id).all()
     for item in item_details:
@@ -60,6 +62,7 @@ def get_items(category_id):
 
 
 @app.route('/items/<item_id>/', methods=['GET'])
+@token_required
 def get_items_details(item_id):
     item_details = session.query(Item).join(Seller).filter(Item.id == item_id).all()
     for row in item_details:
