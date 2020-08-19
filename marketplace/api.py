@@ -6,9 +6,10 @@ from database import *
 from sqlalchemy.orm import sessionmaker
 from functools import wraps
 from models import *
+import os
 
 app = Flask(__name__)
-app.config['secret_key'] = 'onlineshoppingproject'
+app.config['secret_key'] = os.urandom(50)
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
