@@ -27,9 +27,8 @@ def token_required(f):
 def validate_user():
     username = request.form['username']
     password = request.form['password']
-    user_details = db.execute("SELECT * from users WHERE name= \'{}\'  and password= \'{}\'".format(username, password))
-    data = user_details.fetchone()
-    if data is not None:
+    user_details = session.query(User).filter_by(name=username,password=password).first()
+    if user_details:
         token = jwt.encode({'name': username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},app.config['secret_key'])
         return jsonify({'token': token.decode('UTF-8'), 'message': 'logged in successfuly'}), 200
     else:
@@ -37,7 +36,6 @@ def validate_user():
 
 
 @app.route('/categories', methods=['GET'])
-@token_required
 def display_categories():
     categories = session.query(Category).all()
     formatted_result = [display(row) for row in categories]
@@ -63,15 +61,17 @@ def get_items_details(id):
     return jsonify(formatted_result)
 
 @app.route('/cart', methods=['POST'])
-@token_required
 def add_item_to_cart():
     item_identity = request.form.get('item_identity')
     user_identity = request.form.get('user_identity')
     required_quantity = request.form.get('required_quantity')
-    item_to_be_added = Cart(item_id=item_identity, user_identity=user_identity, required_quantity=required_quantity)
-    session.add(item_to_be_added)
-    session.commit()
-    return "Data added successfully"
+    try:
+        item_to_be_added = Cart(item_id=item_identity, user_identity=user_identity, required_quantity=required_quantity)
+        session.add(item_to_be_added)
+        session.commit()
+        return "Data added successfully"
+    except Exception as error:
+        return "Error occured"
 
 @app.route('/cart', methods=['PUT'])
 @token_required
@@ -79,20 +79,26 @@ def update_quantity():
     item_identity = request.form.get('item_identity')
     user_identity = request.form.get('user_identity')
     desired_quantity = request.form.get('desired_quantity')
-    update_quantity = session.query(Cart).filter_by(item_identity=item_identity, user_identity=user_identity,
+    try:
+        update_quantity = session.query(Cart).filter_by(item_identity=item_identity, user_identity=user_identity,
                                                     desired_quantity=desired_quantity).one()
-    update_quantity.desired_quantity = desired_quantity
-    session.add(update_quantity)
-    session.commit()
-    return "Data updated successfully"
+        update_quantity.desired_quantity = desired_quantity
+        session.add(update_quantity)
+        session.commit()
+        return "Data updated successfully",200
+    except Exception as error:
+        return "error occured",500
 
 @app.route('/cart/<item_id>', methods=['DELETE'])
 def remove_item_from_cart(item_id):
     item_identity = item_id
     user_identity = request.form['user_identity']
-    remove_item = session.query(Cart).filter_by(item_id=item_identity, user_identity=user_identity).one()
-    session.delete(remove_item)
-    return "deleted successfully"
+    try:
+        remove_item = session.query(Cart).filter_by(item_id=item_identity, user_identity=user_identity).one()
+        session.delete(remove_item)
+        return "deleted successfully",200
+    except Exception as error:
+        return "error occured",str(error)
 
 @app.route('/cart/<user_id>', methods=['GET'])
 def view_cart_items(user_id):
@@ -109,7 +115,7 @@ def logout():
 
 @app.route('/')
 def index():
-    return "<h1>WELCOME TO MARKET PLACE</h1>"
+    return "<h1>WELCOME TO MARKET</h1>"
 
 
 Session = sessionmaker(bind=db)
