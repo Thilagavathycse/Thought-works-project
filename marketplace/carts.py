@@ -1,22 +1,26 @@
-from main import *
+from flask import session, Blueprint
+from models import *
+# coding=UTF-8
+from app import *
+carts_pb = Blueprint('carts_pb', __name__)
 
-@app.route('/cart', methods=['POST'])
+
+@carts_pb.route('/cart', methods=['POST'])
 @token_required
 def add_item_to_cart():
-    item_identity = request.form.get('item_identity')
-    user_identity = request.form.get('user_identity')
-    required_quantity = request.form.get('required_quantity')
+    item_identity = request.form.get('item_id')
+    user_identity = request.form.get('user_id')
+    required_quantity = request.form.get('quantity')
     try:
-        item_to_be_added = Cart(item_id=item_identity, user_identity=user_identity, required_quantity=required_quantity)
+        item_to_be_added = Cart(item_id=item_identity, user_id=user_identity, quantity=required_quantity)
         session.add(item_to_be_added)
         session.commit()
         return "Data added successfully"
     except Exception as error:
-        return "error occured while adding an item"
+        return "error occurred while adding item to cart,Try again!"
 
 
-@app.route('/cart', methods=['PUT'])
-@token_required
+@carts_pb.route('/cart', methods=['PUT'])
 def update_quantity():
     item_identity = request.form.get('item_identity')
     user_identity = request.form.get('user_identity')
@@ -29,9 +33,11 @@ def update_quantity():
         session.commit()
         return "Data updated successfully"
     except Exception as error:
-        return "error occured while updating an item"
+        return "error occurred while updating item to cart,Try again!"
 
-@app.route('/cart/<item_id>', methods=['DELETE'])
+
+@carts_pb.route('/cart/<item_id>', methods=['DELETE'])
+@token_required
 def remove_item_from_cart(item_id):
     item_identity = item_id
     user_identity = request.form['user_identity']
@@ -40,10 +46,12 @@ def remove_item_from_cart(item_id):
         session.delete(remove_item)
         return "deleted successfully"
     except Exception as error:
-        return "error occured while deletion"
+        return "error occurred while deleting item to cart,Try again!"
 
-@app.route('/cart/<user_id>', methods=['GET'])
+
+@carts_pb.route('/cart/<user_id>', methods=['GET'])
+@token_required
 def view_cart_items(user_id):
     for item, cart in session.query(Item, Cart).filter(Cart.user_id == user_id).all():
-        return "Product ID: {} product Name: {} product price: {} quantity: {}".format(item.item_id, item.name,
+        return "Product ID: {} product Name: {} product price: {} quantity: {}".format(item.id, item.name,
                                                                                      item.price, cart.quantity)
