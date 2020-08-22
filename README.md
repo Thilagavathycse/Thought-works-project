@@ -1,16 +1,23 @@
 # Thought-works-project
+
 Project Name: Market Place
+
 Project Overview:It is a web application.It enables the users or customers to buy goods through online.For instance,
 Amazon.com,Ebay.com
+
+
 Clone my project: git clone https://github.com/Thilagavathycse/Thought-works-project.git
 Installation instructions:
+
          1.Python editor
          2.installation command for cmd:pip install flask.
            Flask 1.1.2
            Werkzeug 1.0.1
          3.install all the packages mentioned in requirements.txt
            command for cmd:pip install package name
-List of files:                                                                    Resource Api             HTTP method                    
+List of files: 
+                                                                   
+                                                                   Resource Api                           method                    
         1.database.py  #Database connection
         2.login.py     #For User login                                  http://127.0.0.1:5000/user           POST
         3.app.py       #jwt token file                                  
@@ -23,13 +30,17 @@ List of files:                                                                  
                        #View items                                      http://127.0.0.1:5000/cart            GET
         7.main.py      #To run all the files
 Database Configuration:
+
         server:localhost http://127.0.0.1:5000
         Server :localhost
         Database :online_shopping
         Port :5432
         Username :postgres
         Password for user postgres:#Thilaga1094
+        
  Run description:
        run main.py
-Known bugs:working on generating hash for the password in database 
+       
+Known bugs:
+working on generating hash for the password in database 
               
