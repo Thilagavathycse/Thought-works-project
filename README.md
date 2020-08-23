@@ -11,10 +11,10 @@ Clone my project: git clone https://github.com/Thilagavathycse/Thought-works-pro
 
 Installation instructions:
 
-    1.Open a terminal or command prompt
-    2.Navigate to the folder with your requirements.txt
-    3.run: pip install -r requirements.txt
-    4.You can install  all the dependencies
+    Open a terminal or command prompt
+    Navigate to the folder with your requirements.txt
+    run: pip install -r requirements.txt
+    You can install  all the dependencies
 
 List of files: 
                                                                    
@@ -32,15 +32,17 @@ List of files:
         7.main.py      #To run all the files
 Database Configuration:
 
-        server:localhost http://127.0.0.1:5000
-        Server :localhost
-        Database :online_shopping
-        Port :5432
-        Username :postgres
-        Password for user postgres:#Thilaga1094
+        filename:database.py
+        username:""
+        password:""
+        host:localhost
+        port:5432
+        database:online_shopping
+        
         
  Run description:
        run main.py
        
 Known bugs:
 working on generating hash for the password in database 
+              
