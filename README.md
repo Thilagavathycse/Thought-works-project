@@ -11,12 +11,11 @@ Clone my project: git clone https://github.com/Thilagavathycse/Thought-works-pro
 
 Installation instructions:
 
-         1.Python editor
-         2.installation command for cmd:pip install flask.
-           Flask 1.1.2
-           Werkzeug 1.0.1
-         3.install all the packages mentioned in requirements.txt
-           command for cmd:pip install package name
+    1.Open a terminal or command prompt
+    2.Navigate to the folder with your requirements.txt
+    3.run: pip install -r requirements.txt
+    4.You can install  all the dependencies
+
 List of files: 
                                                                    
                                                                    Resource Api                           method                    
@@ -45,4 +44,3 @@ Database Configuration:
        
 Known bugs:
 working on generating hash for the password in database 
-              
