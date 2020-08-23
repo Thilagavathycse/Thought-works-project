@@ -11,10 +11,10 @@ Clone my project: git clone https://github.com/Thilagavathycse/Thought-works-pro
 
 Installation instructions:
 
-    Open a terminal or command prompt
-    Navigate to the folder with your requirements.txt
-    run: pip install -r requirements.txt
-    You can install  all the dependencies
+   1. Open a terminal or command prompt
+   2. Navigate to the folder with your requirements.txt
+   3. run: pip install -r requirements.txt
+   4. You can install  all the dependencies
 
 List of files: 
                                                                    
