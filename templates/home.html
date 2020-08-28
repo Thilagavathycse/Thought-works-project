@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body bgcolor="teal">
+<br>
+<h3 align="center">you have logged in as {{name}}</h3>
+<div>
+    <table id="users" onclick="get_items()"></table></div>
+<div>
+<table id="demo" onclick="get_details()"></table>
+</div>
+<div>
+    <table id="item"></table>
+</div>
+<script>
+    fetch("http://127.0.0.1:5000/categories")
+
+    .then(response => response.json())
+    .then(json => {
+        let li = `<tr><th>Number</th><th>Category</th></tr>`;
+
+        json.forEach(user => {
+        category_id=user.id
+            li += `<tr>
+                <td>${user.id} </td>
+                <td>${user.name}</td>
+            </tr>`;
+        });
+    document.getElementById("users").innerHTML = li;
+});
+function get_items(){
+    fetch('http://127.0.0.1:5000/categories/category_id')
+        .then(response => response.json())
+        .then(json => {
+            let li = `<tr><th>Name</th><th>Email</th></tr>`;
+            json.forEach(items=>{
+                li += `<tr>
+                <td>${items.id} </td>
+                <td>${items.name}</td>
+            </tr>`;
+            }) ;
+            document.getElementById("demo").innerHTML+=li;
+
+        });
+    };
+    function get_details(){
+        fetch('http://127.0.0.1:5000/items/i5/')
+        .then(response => response.json())
+        .then(json => {
+            let li = `<tr><th>Name</th><th>price</th><th><description></th></tr>`;
+            json.forEach(details=>{
+                li += `<tr>
+                <td>${details.name}</td>
+                <td>${details.price}</td>
+                <td>${details.description}</td>
+            </tr>`;
+            }) ;
+            document.getElementById("item").innerHTML+=li;
+
+        });
+    };
+
+</script></body>
+</html>

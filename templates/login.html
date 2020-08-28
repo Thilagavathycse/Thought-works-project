@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    login
+  </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <body>
+    <div class ="login">
+      <img src="avatar.jfif" class="avatar">
+      <h1>login here</h1>
+      <form action="/user" method="POST">
+        <p>username:</p>
+        <input type="text" name="username" placeholder="username" id="username" required>
+        <p>password:</p>
+        <input type="password" name="password" placeholder="password" id="password" required>
+        <input type="submit" name="" value="login">
+      </form>
+      <br>
+      <div id="success" class="successalert"  role="alert" style="display:none;"></div>
+      <div id="failure" class="failurealert"  role="alert" style="display:none;"></div>
+      </div>
+<script>
+  $(document).ready(function(){
+    $('form').on('submit',function(event){
+      $.ajax({
+        data:{
+          username:$('#username').val(),
+          password:$('#password').val()
+        },
+        type :'POST',
+        url:'/user'
+      })
+      .done(function(data){
+        if (data.error){
+          $('#failure').text(data.error).show();
+          $('#success').hide();
+
+        }
+        else{
+          $('#success').text(data.message);
+          $('#failure').hide();
+        }
+      });
+      });
+      event.preventDefault();
+  });
+</script>
+      </body>
+</html>
