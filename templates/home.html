@@ -8,14 +8,20 @@
 <br>
 <h3 align="center">you have logged in as {{name}}</h3>
 <div>
-    <table id="users" onclick="get_items()"></table></div>
-<div>
-<table id="demo" onclick="get_details()"></table>
+    <ul id="users" class="category_items"></ul>
 </div>
 <div>
-    <table id="item"></table>
+    <ol id="items"></ol>
+</div>
+<div>
+    <ul id="item_details"></ul>
+</div>
+<div>
+    <table id="details"></table>
 </div>
 <script>
+
+
 fetch("http://127.0.0.1:5000/categories")
 .then(response => response.json())
 .then(json => {
@@ -32,14 +38,33 @@ document.getElementById("users").innerHTML = ul;
  fetch('http://127.0.0.1:5000/categories/'+event.target.id)
  .then(response => response.json())
  .then(json=> {
-     let ul ='<ul>';
+     let ol ='<ol>';
      json.forEach(category_items => {
-        ul +='<br><li id="'+category_items.id+'">'+category_items.name+ '</a>';
+        ol +='<br><li id="'+category_items.id+'">'+category_items.name+ '</a>';
      });
-     document.getElementById("items").innerHTML=ul;
+     document.getElementById("items").innerHTML=ol;
  });
+ document.getElementsByTagName('ol')[0].addEventListener("click",function(event){
+ console.log('event',event.target.id);
+ fetch('http://127.0.0.1:5000/items/'+event.target.id)
+    .then(response => response.json())
+    .then(json => {
+        let li = `<tr><th>Name</th><th>price</th><th>description</th></tr>`;
+        json.forEach(details=>{
+            li += `<tr>
+                <td>${details.name} </td>
+                <td>${details.price}</td>
+                <td>${details.description}</td>
+            </tr>`;
+        });
+
+        document.getElementById('details').innerHTML=li;
+
+    });
+
+
 
  });
-
+ });
 </script></body>
 </html>
