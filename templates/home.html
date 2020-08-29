@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body bgcolor="teal">
 <br>
 <h3 align="center">you have logged in as {{name}}</h3>
+<div id="storage"></div>
+<script>
+    let user_obj={
+    user_id : "{{user_id}}",
+    token:"{{token}}"
+    };
+    let user_obj_serialized=JSON.stringify(user_obj);
+    localStorage.setItem("user_obj",user_obj_serialized)
+    console.log(user_obj_serialized);
+    let user_obj_deserialized = JSON.parse(localStorage.getItem("user_obj"));
+    x=user_obj_deserialized.user_id;
+    y=user_obj_deserialized.token;
+    console.log(x);
+    console.log(y);
+</script>
 <div>
-    <ul id="users" class="category_items"></ul>
+    <ul id="category" class="category_items"></ul>
 </div>
 <div>
     <ol id="items"></ol>
@@ -31,7 +46,7 @@ fetch("http://127.0.0.1:5000/categories")
      ul +='<br><li id="'+category_id+'">'+category.name+ '</a>';
 
 });
-document.getElementById("users").innerHTML = ul;
+document.getElementById("category").innerHTML = ul;
 });
  document.getElementsByTagName('ul')[0].addEventListener("click",function(event){
  console.log('event',event.target.id);
