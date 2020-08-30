@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<html>
+    <head>
+        <style>
+        #button{
+            position: relative;
+            size: 10px;
+
+        }
+        </style>
+</head>
+    <body>
+        <div id="button">
+   <button onclick="addcart()">add-to-cart</button>
+</div>
+        <div>
+            <button onclick="viewcart()">My cart</button>
+        </div>
+    <script>
+    function addcart(){
+    var id=localStorage.getItem('details.id');
+    var user=localStorage.getItem('user_id');
+    $.ajax({url:"http://127.0.0.1:5000/cart",
+    data:{
+    item_id:id,
+    user_id:user,
+    quantity:'1'},
+    type:'POST',
+    success:function(data){
+    alert(data);
+    }
+    });
+    }
+
+       </script>
+    </body>
+</html>
