@@ -8,7 +8,19 @@
    <button onclick="addcart()">add-to-cart</button>
 </div>
         <div>
-            <button onclick="viewcart()">My cart</button>
+            <button onclick="delete_item()">Delete</button>
+        </div>
+        <div>
+<button onclick="update()">update</button>
+    <label for="cars">select quantity:</label>
+  <select name="cars" id="cars">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+  </select>
+  <br><br>
         </div>
     <script>
     function addcart(){
@@ -25,7 +37,34 @@
     }
     });
     }
+    function delete_item(){
+    var id=localStorage.getItem('details.id');
+    var user=localStorage.getItem('user_id');
+    console.log(user);
+    $.ajax({url:'http://127.0.0.1:5000/cart/'+id,
+    data:{
+    user_identity:user},
+    type:'DELETE',
+    success:function(data){
+    alert(data);
+    }
+    });
+    }
+    function update(){
+    var id=localStorage.getItem('details.id');
+    var user=localStorage.getItem('user_id');
+    $.ajax({url:"http://127.0.0.1:5000/cart",
+    data:{
+    item_identity:id,
+    user_identity:user,
+    desired_quantity:'6'},
+    type:'PUT',
+    success:function(data){
+    alert(data);
+    }
+    });
+    }
 
-       </script>
+     </script>
     </body>
 </html>
