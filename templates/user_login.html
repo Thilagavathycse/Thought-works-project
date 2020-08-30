@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
   <title>
     login
   </title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="styles.css">
+
   <body>
+<div>
     <div class ="login">
       <img src="avatar.jfif" class="avatar">
       <h1>login here</h1>
@@ -20,6 +23,7 @@
       <div id="success" class="successalert"  role="alert" style="display:none;"></div>
       <div id="failure" class="failurealert"  role="alert" style="display:none;"></div>
       </div>
+</div>
 <script>
   $(document).ready(function(){
     $('form').on('submit',function(event){
@@ -46,5 +50,6 @@
       event.preventDefault();
   });
 </script>
+
       </body>
 </html>
