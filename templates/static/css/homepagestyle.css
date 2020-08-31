@@ -33,7 +33,7 @@ body {
   color: black;
 }
 .content {
-  background-color: orchid;
+  background-color: ghostwhite;
   padding: 10px;
   height: 600px;
   text-align:center;
@@ -45,4 +45,11 @@ body {
 #category{
     font-size: medium;
     font-family: sans-serif;
+}
+#button :hover{
+  color:green;
+}
+#button{
+  background-color: greenyellow;
+}
 }
